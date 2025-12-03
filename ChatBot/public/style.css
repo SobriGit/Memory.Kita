@@ -1,0 +1,555 @@
+:root {
+    --pink-light: #ffe6e6;
+    --pink-main: #ffadd2;
+    --pink-dark: #ff75a0;
+    --white: #ffffff;
+    --text: #5e3a45;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background-color: var(--pink-light);
+    background-image: radial-gradient(circle, #fff0f5 10%, transparent 10%), radial-gradient(circle, #ffadd2 10%, transparent 10%);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="font-size:20px"><text y="18">❤️</text></svg>'), auto;
+}
+
+/* MUSIC PLAYER */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--pink-main);
+}
+.disk { animation: spin 3s linear infinite; animation-play-state: paused; }
+.running { animation-play-state: running; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+#play-btn { background: var(--pink-dark); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+
+/* HERO SECTION & 3D */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+}
+
+h1 { font-family: 'Pacifico', cursive; font-size: 3rem; color: var(--pink-dark); }
+.badge { background: var(--pink-dark); color: white; padding: 5px 15px; border-radius: 20px; margin-top: 10px; display: inline-block; }
+
+/* TIMELINE */
+.timeline-section { padding: 50px 20px; max-width: 800px; margin: 0 auto; }
+.section-title { text-align: center; font-size: 2.5rem; margin-bottom: 30px; color: var(--pink-dark); }
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 0px var(--pink-main);
+    border: 2px solid var(--pink-main);
+}
+
+/* GALLERY */
+.gallery { padding: 50px 20px; background: rgba(255,255,255,0.5); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+.photo img { width: 100%; border-radius: 10px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
+.photo:hover img { transform: scale(1.05) rotate(2deg); }
+
+/* CHATBOT */
+.chat-section { padding: 50px 20px; display: flex; justify-content: center; }
+.chat-container {
+    width: 100%; max-width: 500px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(255, 117, 160, 0.2);
+    border: 3px solid var(--pink-main);
+}
+.chat-header { background: var(--pink-main); padding: 15px; display: flex; align-items: center; gap: 10px; color: white; }
+.chat-box { height: 300px; overflow-y: auto; padding: 15px; background: #fffbfb; display: flex; flex-direction: column; gap: 10px; }
+.msg { padding: 10px 15px; border-radius: 20px; max-width: 80%; font-size: 0.95rem; }
+.msg.ai { background: var(--pink-light); align-self: flex-start; border-bottom-left-radius: 5px; }
+.msg.user { background: var(--pink-dark); color: white; align-self: flex-end; border-bottom-right-radius: 5px; }
+.chat-input { display: flex; padding: 10px; border-top: 1px solid #eee; }
+.chat-input input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+.chat-input button { background: var(--pink-dark); color: white; border: none; width: 40px; border-radius: 50%; margin-left: 10px; cursor: pointer; }
+
+/* ANIMASI KLIK HATI */
+.click-heart {
+    position: absolute;
+    color: var(--pink-dark);
+    font-size: 20px;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+}
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+}
+
+/* --- STYLE UNTUK KARTU YANG BISA DIKLIK --- */
+a.card {
+    text-decoration: none; /* Hilangkan garis bawah link */
+    color: var(--text);
+    display: block; /* Supaya bisa diklik se-kotak full */
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+a.card:hover {
+    transform: translateY(-10px) scale(1.02); /* Efek naik dikit */
+    box-shadow: 0 15px 30px rgba(255, 77, 166, 0.4);
+    background: #fff0f5;
+    border-color: #ff4d4d;
+}
+
+.read-more {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+a.card:hover .read-more {
+    opacity: 1;
+    letter-spacing: 1px; /* Efek teks melebar */
+    transition: 0.3s;
+}
+
+/* --- STYLE HALAMAN CERITA (STORY MODE) --- */
+.story-mode {
+    background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: white;
+    color: #ff4d4d;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    transform: translateX(-5px);
+    background: #ff4d4d;
+    color: white;
+}
+
+.story-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.story-header {
+    text-align: center;
+    margin-bottom: -30px; /* Supaya kertasnya agak naik numpuk foto */
+    position: relative;
+    z-index: 2;
+}
+
+.story-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+.story-paper {
+    background: #fff;
+    padding: 60px 40px 40px; /* Padding atas gede biar ga ketabrak foto */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    font-family: 'Patrick Hand', cursive; /* Font tulisan tangan */
+    font-size: 1.2rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+    /* Efek garis kertas buku tulis */
+    background-image: repeating-linear-gradient(transparent, transparent 31px, #e1e1e1 32px);
+}
+
+.mini-gallery {
+    margin-top: 30px;
+    text-align: center;
+}
+.mini-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+}
+.mini-grid img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid white;
+    transform: rotate(-5deg);
+}
+.mini-grid img:nth-child(even) {
+    transform: rotate(5deg);
+}
+/* --- UPDATE TAMPILAN HEADER CHAT --- */
+.chat-header {
+    display: flex;
+    justify-content: space-between; /* Pisahkan nama & tombol */
+    align-items: center;
+    padding: 15px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.header-actions button {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.3s;
+    color: white;
+}
+
+.header-actions button:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+/* Biar tombol hapus warnanya agak merah pas di-hover */
+#clear-btn:hover {
+    background: #ff4d4d;
+}
+
+/* =========================================
+   GAYA FOTO 3D HOLOGRAM (PORTRAIT)
+   (Tempel ini di paling bawah style.css)
+   ========================================= */
+
+.hero-3d-area {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 1000px; /* Kunci efek 3D */
+    padding-bottom: 50px;
+}
+
+.card-3d {
+    /* Ukuran Portrait (Tegak) sesuai foto kamu */
+    width: 300px; 
+    height: 450px; 
+    
+    background: rgba(255, 255, 255, 0.1); /* Efek Kaca Transparan */
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Bayangan biar melayang */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Teks nempel di bawah */
+    align-items: center;
+    
+    transform-style: preserve-3d; /* Wajib biar bisa muter 3D */
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Foto Full Satu Kartu */
+.hologram-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateZ(20px); /* Fotonya agak mundur dikit */
+}
+
+.hologram-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Biar foto gak gepeng/melar */
+    border-radius: 20px;
+}
+
+/* Teks yang Melayang (Pop Up) */
+.card-content {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(60px); /* Teks MAJU 60px ke depan */
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4); /* Gelap dikit biar tulisan kebaca */
+    width: 100%;
+    padding: 15px;
+    backdrop-filter: blur(3px);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.card-content h2 {
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.card-content p {
+    color: #ffd1dc; /* Pink pastel */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* ==================================================
+   🔥 JURUS PAKSA EFEK 3D HOLOGRAM 🔥
+   (Tempel ini di baris PALING BAWAH style.css)
+   ================================================== */
+
+/* 1. Paksa area pembungkus punya jarak pandang 3D */
+.hero-3d-area {
+    perspective: 1200px !important; /* Angka makin kecil = efek makin ekstrem */
+    transform-style: preserve-3d !important;
+}
+
+/* 2. INI KUNCINYA! Paksa kartu menjaga posisi 3D anak-anaknya */
+.card-3d {
+    transform-style: preserve-3d !important;
+    /* Saya hapus overflow:hidden biar efek pop-out gak kepotong */
+    overflow: visible !important; 
+}
+
+/* 3. Paksa Foto untuk mundur sedikit ke belakang */
+.hologram-img {
+    /* translateZ negatif artinya mundur ke dalam layar */
+    transform: translateZ(-20px) scale(1.1) !important; 
+}
+
+/* 4. Paksa Teks untuk maju jauh ke depan (Pop Up) */
+.card-content {
+    /* translateZ positif artinya maju keluar layar */
+    transform: translateZ(80px) !important; 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+}
+
+/* =========================================
+   GAYA MUSIC PLAYER: KAPSUL MELAYANG (FIXED)
+   ========================================= */
+.music-wrapper {
+    /* INI KUNCINYA BIAR IKUT LAYAR */
+    position: fixed;   /* Melayang di layar */
+    bottom: 20px;      /* Jarak 20px dari BAWAH */
+    left: 20px;        /* Jarak 20px dari KIRI */
+    z-index: 9999;     /* Pastikan dia paling depan (di atas segalanya) */
+    
+    /* GAYA TAMPILAN KAPSUL */
+    background: #ffffff; 
+    padding: 8px 15px;
+    border-radius: 50px; 
+    box-shadow: 0 5px 15px rgba(255, 77, 166, 0.3); 
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 2px solid #ff9a9e; 
+    max-width: 300px;
+    transition: all 0.3s ease; /* Efek halus */
+}
+
+/* Biar kalau di-hover agak naik dikit */
+.music-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255, 77, 166, 0.5); 
+}
+
+/* Area Teks Lagu (Marquee) */
+.song-info {
+    width: 130px; 
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ff5e78;
+    font-weight: bold;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+}
+
+/* Tombol-tombol */
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.main-btn {
+    background: #ff9a9e;
+    color: white;
+    border: none;
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.3s;
+}
+
+.main-btn:hover { background: #ff758c; transform: scale(1.1); }
+
+.mini-btn {
+    background: transparent;
+    color: #ff9a9e;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.mini-btn:hover { color: #ff5e78; transform: scale(1.2); }
+
+/* =========================================
+   1. GAYA GALERI KOTAK (GRID SYSTEM)
+   ========================================= */
+.memory-section {
+    padding: 50px 20px;
+    text-align: center;
+    background: #fff0f5; /* Pink muda banget */
+}
+
+.gallery-grid {
+    display: grid;
+    /* Otomatis atur kolom: Laptop 4 kolom, HP 2 kolom */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+    gap: 15px; 
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    background: white;
+    padding: 8px;           /* Bingkai Putih Polaroid */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    height: 200px;          /* Tinggi seragam */
+    overflow: hidden;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05) rotate(1deg); /* Efek miring dikit pas disentuh */
+    box-shadow: 0 10px 20px rgba(255, 77, 166, 0.3);
+    z-index: 10;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Biar foto gak gepeng */
+    border-radius: 4px;
+}
+
+/* =========================================
+   2. GAYA POPUP LIGHTBOX (LAYAR HITAM)
+   ========================================= */
+.modal {
+    display: none; /* Sembunyi dulu */
+    position: fixed; 
+    z-index: 99999; /* Paling depan menutupi web */
+    padding-top: 50px; 
+    left: 0; top: 0;
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.9); /* Hitam Transparan */
+    backdrop-filter: blur(5px); /* Efek Buram di belakang */
+}
+
+.modal-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 60vh; /* Maksimal tinggi 60% layar */
+    border: 5px solid white; 
+    border-radius: 5px;
+    box-shadow: 0 0 50px rgba(255,255,255,0.2);
+    animation: zoom 0.4s; /* Animasi Zoom */
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} to {transform:scale(1)}
+}
+
+/* Teks Cerita di Popup */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: white;
+    padding: 20px 0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    font-family: sans-serif;
+    text-shadow: 0 2px 4px black;
+}
+
+/* Tombol Close (X) */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-btn:hover { color: #ff9a9e; }
+
+/* ATURAN HP */
+@media (max-width: 768px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item { height: 150px; }
+}
