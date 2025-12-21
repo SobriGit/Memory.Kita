@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 const HISTORY_FILE = 'chat_history.json';
 
 // ✅ API KEY KAMU
-const GROQ_API_KEY = "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"; 
+const GROQ_API_KEY = "process.env.API_KEY;"; 
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -115,4 +115,5 @@ app.post('/api/chat-sobri', async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(` SOBRI BUCIN MODE ON - PORT ${PORT}`);
+
 });
